@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using Newtonsoft.Json;
 using Npgsql;
-using StackExchange.Redisa;
+using StackExchange.Redis;
 using System.Collections;
 
 namespace Worker
@@ -23,9 +23,13 @@ namespace Worker
 		string pqsql_addr = Environment.GetEnvironmentVariable("DB_PORT_5432_TCP_ADDR");
 		Console.WriteLine(pqsql_addr);
 		string pqsql_port = Environment.GetEnvironmentVariable("DB_PORT_5432_TCP_PORT");
-                Console.WriteLine(pqsql_port);
+                Console.WriteLine($"pqsql port is {pqsql_port}");
 		string pqsql_id = "postgres";
-		string pqsql_name = "db";
+		string pqsl_db = "postgres";
+		string pqsql_name = Environment.GetEnvironmentVariable("DB_NAME");
+		Console.WriteLine($"pqsql name is {pqsql_name}");
+	       //	string test_pqsl = "db.test121313-alidemo04org.myalauda.cn";
+	       //	 string test_port = "10011";
             try
             {
 		//string connstring = String.Format("Server={0};Port={1};" + 
@@ -33,10 +37,11 @@ namespace Worker
                    // tbHost.Text, tbPort.Text, tbUser.Text, 
                    // tbPass.Text, tbDataBaseName.Text );
 		string pgsqlstring = String.Format("Server={0};Port={1};" +
-			"User Id={2};Database={3};",pqsql_addr,pqsql_port,pqsql_id,pqsql_name);
+			"User Id={2};Database={3}",pqsql_addr,pqsql_port,pqsql_id,pqsl_db);
                 var pgsql = OpenDbConnection(pgsqlstring);
+		Console.WriteLine($"var pgsql is {pgsql}");
                 var redis = OpenRedisConnection(redis_addr).GetDatabase();
-
+                Console.WriteLine($"var redis is {redis}");
                 var definition = new { vote = "", voter_id = "" };
                 while (true)
                 {
@@ -96,7 +101,7 @@ namespace Worker
         {
             // Use IP address to workaround hhttps://github.com/StackExchange/StackExchange.Redis/issues/410
             var ipAddress = ipaddr;
-	    var redisPort = port;
+	   // var redisPort = port;
             Console.WriteLine($"Found redis at {ipAddress}");
 
             while (true)
