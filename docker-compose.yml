@@ -1,16 +1,16 @@
 redis:
-  image: redis:alpine
+  image: index.alauda.cn/library/redis:alpine
   ports:
   - '6379'
 
 db:
-  image: postgres:9.4
+  image: index.alauda.cn/library/postgres:9.4
   ports:
   - '5432'
 
 vote:
     command: python app.py
-    image: test-vote:latest
+    image: index.alauda.cn/alaudasa/voting-app-vote:latest
     links:
     - redis:redis 
     ports:
@@ -19,14 +19,14 @@ vote:
 
 worker:
     command: dotnet Worker.dll
-    image: test-work:latest
+    image: index.alauda.cn/alaudasa/voting-app-worker:latest
     links:
     - redis:redis
     - db:db
 
 result:
     command: nodemon --debug server.js
-    image: test-result:latest
+    image: index.alauda.cn/alaudasa/voting-app-result:latest
     links:
     - db:db
     ports:

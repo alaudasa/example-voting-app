@@ -10,14 +10,14 @@ services:
       - "5000:80"
 
   redis:
-    image: redis:alpine
+    image: index.alauda.cn/library/redis:alpine
     ports: ["6379"]
 
   worker:
     build: ./worker
 
   db:
-    image: postgres:9.4
+    image: index.alauda.cn/library/postgres:9.4
 
   result:
     build: ./result
