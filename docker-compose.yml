@@ -18,7 +18,6 @@ vote:
       - '5858:5858'
 
 worker:
-    command: dotnet Worker.dll
     image: index.alauda.cn/alaudasa/voting-app-worker:latest
     links:
     - redis:redis
