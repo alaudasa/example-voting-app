@@ -1,0 +1,36 @@
+redis:
+  image: index.alauda.cn/library/redis:alpine
+  ports:
+  - '6379'
+  size: XS
+
+db:
+  image: index.alauda.cn/library/postgres:9.4
+  ports:
+  - '5432'
+  size: XS
+
+vote:
+  command: python app.py
+  image: index.alauda.cn/alaudasa/voting-app-vote:latest
+  links:
+  - redis:redis 
+  ports:
+    - '80/http'
+  size: XS
+
+worker:
+  image: index.alauda.cn/alaudasa/voting-app-worker:latest
+  links:
+  - redis:redis
+  - db:db
+  size: XS
+
+result:
+  command: nodemon --debug server.js
+  image: index.alauda.cn/alaudasa/voting-app-result:latest
+  links:
+  - db:db
+  ports:
+  - '80/http'
+  size: XS
