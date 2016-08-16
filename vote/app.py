@@ -6,7 +6,7 @@ import random
 import json
 
 option_a = os.getenv('OPTION_A', "CATS")
-option_b = os.getenv('OPTION_B', "DOG")
+option_b = os.getenv('OPTION_B', "DOGS")
 redis_addr = os.getenv('REDIS_PORT_6379_TCP_ADDR')
 redis_port = os.getenv('REDIS_PORT_6379_TCP_PORT')
 hostname = socket.gethostname()
