@@ -5,8 +5,8 @@ import socket
 import random
 import json
 
-option_a = os.getenv('OPTION_A', "Cats")
-option_b = os.getenv('OPTION_B', "Dogs")
+option_a = os.getenv('OPTION_A', "JAVA")
+option_b = os.getenv('OPTION_B', "PHP")
 redis_addr = os.getenv('REDIS_PORT_6379_TCP_ADDR')
 redis_port = os.getenv('REDIS_PORT_6379_TCP_PORT')
 hostname = socket.gethostname()
