@@ -16,4 +16,5 @@ RUN ["mvn", "verify"]
 ADD src /code/src
 RUN ["mvn", "package"]
 
+ENTRYPOINT  ["entrypoint.sh"]
 CMD ["java", "-jar", "target/worker-jar-with-dependencies.jar"]

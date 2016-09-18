@@ -10,7 +10,7 @@ db:
 
 vote:
   command: python app.py
-  image: index.alauda.cn/alaudasa/voting-app-vote:latest
+  image: private-registry-int-ali-1.alauda.cn:5000/voting-app:latest
   links:
   - redis:redis 
   ports:
@@ -18,14 +18,14 @@ vote:
     - '5858:5858'
 
 worker:
-  image: index.alauda.cn/alaudasa/voting-app-worker:latest
+  image: private-registry-int-ali-1.alauda.cn:5000/voting-worker:latest
   links:
   - redis:redis
   - db:db
 
 result:
   command: nodemon --debug server.js
-  image: index.alauda.cn/alaudasa/voting-app-result:latest
+  image: private-registry-int-ali-1.alauda.cn:5000/voting-result:latest
   links:
   - db:db
   ports:
