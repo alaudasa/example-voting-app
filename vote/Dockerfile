@@ -1,6 +1,13 @@
 # Using official python runtime base image
 FROM index.alauda.cn/library/python:2.7-alpine
 
+RUN { \
+       		echo '[global]'; \
+       		echo 'trusted-host = pypi.douban.com'; \
+       		echo 'index-url = http://pypi.douban.com/simple'; \
+       	} > /etc/pip.conf
+
+
 # Set the application directory
 WORKDIR /app
 
