@@ -1,20 +1,9 @@
 FROM index.alauda.cn/library/java:openjdk-8-jdk-alpine
 
-RUN MAVEN_VERSION=3.3.9 \
- && cd /usr/share \
- && wget http://mirror.bit.edu.cn/apache/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz -O - | tar xzf - \
- && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
- && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+RUN mkdir /app
 
-WORKDIR /code
+WORKDIR /app
 
-ADD pom.xml /code/pom.xml
-RUN ["mvn", "dependency:resolve"]
-RUN ["mvn", "verify"]
+COPY worker-jar-with-dependencies.jar /app/worker-jar-with-dependencies.jar
 
-# Adding source, compile and package into a fat jar
-ADD src /code/src
-RUN ["mvn", "package"]
-
-ENTRYPOINT  ["entrypoint.sh"]
-CMD ["java", "-jar", "target/worker-jar-with-dependencies.jar"]
+CMD ["java", "-jar", "/app/worker-jar-with-dependencies.jar"]
