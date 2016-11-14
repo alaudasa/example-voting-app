@@ -3,6 +3,7 @@ pre_ci_boot:
     image: registry.alauda.cn/library/maven
     tag: latest
 ci:
+    - cd worker
     - mvn package
     - cp target/worker-jar-with-dependencies.jar  $ALAUDACI_DEST_DIR
     - cp Dockerfile $ALAUDACI_DEST_DIR
