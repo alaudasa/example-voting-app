@@ -1,6 +1,6 @@
 version: "0.1.0"
 pre_ci_boot:
-    image: index.alauda.cn/alauda/maven
+    image: registry.alauda.cn/library/maven
     tag: latest
 ci:
     - mvn package
