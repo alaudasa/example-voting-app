@@ -8,6 +8,11 @@ import org.json.JSONObject;
 class Worker {
   public static void main(String[] args) {
     try {
+      System.err.println("Env vars");
+      Map<String, String> env = System.getenv();
+      for (String envName : env.keySet()) {
+          System.out.format("%s=%s%n", envName, env.get(envName));
+      }
       Jedis redis = connectToRedis(System.getenv("REDIS_PORT_6379_TCP_ADDR"), Integer.parseInt(System.getenv("REDIS_PORT_6379_TCP_PORT")));
       Connection dbConn = connectToDB(System.getenv("DB_PORT_5432_TCP_ADDR"), Integer.parseInt(System.getenv("DB_PORT_5432_TCP_PORT")));
 
