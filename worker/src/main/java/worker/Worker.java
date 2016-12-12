@@ -3,6 +3,7 @@ package worker;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import java.sql.*;
+import java.util.*;
 import org.json.JSONObject;
 
 class Worker {
