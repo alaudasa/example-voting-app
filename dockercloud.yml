@@ -31,3 +31,4 @@ worker:
   image: 'docker/example-voting-app-worker:latest'
   restart: always
   target_num_containers: 3
+
